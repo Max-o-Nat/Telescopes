@@ -1,0 +1,17 @@
+extends layout
+
+block content
+	if info.length == 0
+		h3 Нет подходящих результатов
+	else
+		h3='Найдено '+info.length+ ' результат(ов):'
+		table
+			each telescope in info
+				tr
+					td
+						p=telescope.id+' '+telescope.name
+					td
+						p=telescope.type
+						p=telescope.country
+						p=telescope.city
+						p=telescope.info

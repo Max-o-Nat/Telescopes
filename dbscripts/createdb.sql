@@ -1,0 +1,5 @@
+DROP DATABASE IF EXISTS telescopesdb;
+
+CREATE DATABASE telescopesdb
+	LC_COLLATE 'ru_RU.UTF8' LC_CTYPE 'ru_RU.UTF8'
+	TEMPLATE template0;

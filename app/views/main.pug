@@ -1,0 +1,20 @@
+doctype html
+html(lang='ru_RU')
+	head
+		meta(charset='utf-8')
+		meta(property='og:image', content='/Telescopes.jpg')
+		meta(property='og:site_name', content=Telescopes)
+		title=title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		link(rel='shortcut icon', href='./favicon.ico', type="image/x-icon")
+		block gallery
+	body
+		block navigation
+		h1='Telescopes'
+		h2=title
+		if errors 
+			ul
+				for error in errors
+					li!= error.msg
+		block content
+		block footerblock
