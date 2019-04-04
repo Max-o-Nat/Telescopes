@@ -8,6 +8,7 @@ const db = require(__dirname+'/models/db')
 const config = require(__dirname + '/config/' + (process.env.NODE_ENV || 'development'))
 
 const indexRouter = require(__dirname+'/controllers/index')
+const objectsRouter = require(__dirname+'/controllers/objects')
 
 const app = express()
 
@@ -22,6 +23,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.use('/', indexRouter)
+app.use('/objects', objectsRouter)
 
 app.use(function(req, res, next) {
 	next(createError(404))
