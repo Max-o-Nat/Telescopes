@@ -9,6 +9,7 @@ const config = require(__dirname + '/config/' + (process.env.NODE_ENV || 'develo
 
 const indexRouter = require(__dirname+'/controllers/index')
 const objectsRouter = require(__dirname+'/controllers/objects')
+const visibilityRouter = require(__dirname+'/controllers/visibility')
 
 const app = express()
 
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use('/', indexRouter)
 app.use('/objects', objectsRouter)
+app.use('/visibility', visibilityRouter)
 
 app.use(function(req, res, next) {
 	next(createError(404))
