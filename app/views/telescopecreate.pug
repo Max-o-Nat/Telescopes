@@ -1,0 +1,28 @@
+extends layout
+
+include selector.pug
+
+block content
+	table
+		tr
+			td
+				form(action='/telescopes/create',method='POST')
+					ul
+						le
+							h3 Название
+							input(type='text',id='name', name='name', value=name)
+						le
+							h3 Тип
+							select(id="type" name="type")
+								+selector(['рефлектор','рефрактор','катадиоптрический'],type)
+						le
+							h3 Информация
+							input(type='text',id='telinfo', name='telinfo', value=telinfo)
+						le
+							h3 Страна
+							input(type='text',id='telcountry', name='telcountry', value=telcountry) 
+						le
+							h3 Город
+							input(type='text',id='telcity', name='telcity', value=telcity) 
+					p
+						button(type='submit')='Добавить'

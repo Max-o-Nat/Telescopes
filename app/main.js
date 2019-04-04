@@ -8,6 +8,9 @@ const db = require(__dirname+'/models/db')
 const config = require(__dirname + '/config/' + (process.env.NODE_ENV || 'development'))
 
 const indexRouter = require(__dirname+'/controllers/index')
+const telescopesRouter = require(__dirname+'/controllers/telescopes')
+const objectsRouter = require(__dirname+'/controllers/objects')
+const visibilityRouter = require(__dirname+'/controllers/visibility')
 
 const app = express()
 
@@ -22,6 +25,9 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.use('/', indexRouter)
+app.use('/telescopes', telescopesRouter)
+app.use('/objects', objectsRouter)
+app.use('/requests', requestsRouter)
 
 app.use(function(req, res, next) {
 	next(createError(404))
