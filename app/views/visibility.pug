@@ -1,0 +1,33 @@
+extends layout
+
+include selector.pug
+
+block content
+	a(href='/visibility/create') Добавить видимость
+	form(action='/visibility/search',method='POST')
+		select(id="searchtype" name="searchtype")
+			+selector(['ID телескопа', 'ID небесного тела'], searchtype)
+		input(type='number', min=1, id='searchtext', name='searchtext', value= searchtext?searchtext:1)
+		button(type='submit')='Поиск'
+	form(action='/visibility/sort',method='POST')
+		button(type='submit')='Сортировать по небесным объектам'
+	form(action='/visibility',method='GET')
+		button(type='submit')='Сбросить'
+	if info.length == 0
+		h3 Нет подходящих результатов
+	else
+		h3='Найдено '+info.length+ ' результат(ов):'
+		table
+			tr
+				td
+				td Телескопы
+				td Небесные тела
+			each vis in info
+				tr
+					td
+						a(href='/visibility/'+vis.id+'/delete') Удалить
+					td
+						a(href='/telescopes/'+vis.telid)=vis.telid
+					td
+						a(href='/objects/'+vis.objid)=vis.objid
+							

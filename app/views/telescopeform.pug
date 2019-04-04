@@ -1,0 +1,35 @@
+extends layout
+
+include selector.pug
+
+block content
+	if info.length == 0
+		h3 Такого телескопа не существует
+	else
+		table
+			each tel in info
+				tr
+					td
+						form(action='/telescopes/'+tel.telescopeid+'/change',method='POST')
+							ul
+								h3='ID '+tel.telescopeid
+								le
+									h3 Название
+									input(type='text',id='name', name='name', value=name?name:tel.telescopename)
+								le
+									h3 Тип
+									select(id="type" name="type")
+										+selector(['рефлектор','рефрактор','катадиоптрический'],type?type:tel.telescopetype)
+								le
+									h3 Информация
+									input(type='text',id='telinfo', name='telinfo', value=telinfo?telinfo:tel.telescopeinfo,maxlength=1000)
+								le
+									h3 Страна
+									input(type='text',id='telcountry', name='telcountry', value=telcountry?telcountry:tel.country,maxlength=1000)
+								le
+									h3 Город
+									input(type='text',id='telcity', name='telcity', value=telcity?telcity:tel.city,maxlength=1000)
+							p
+								button(type='submit')='Изменить'
+						form(action='/telescopes/'+tel.telescopeid,method='GET')
+							button(type='submit')='Сбросить'
