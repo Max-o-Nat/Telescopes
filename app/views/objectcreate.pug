@@ -1,0 +1,20 @@
+extends layout
+
+include selector.pug
+
+block content
+	table
+		tr
+			td
+				form(action='/objects/create',method='post')
+					h3 Название
+					input(type='text', id='objname', name='objname', value=objname?objname:'')
+					h3 Высота светила
+					input(type='number',step=0.00001, min=-90, max=90, id='objh', name='objh', value=objh?objh:0)
+					h3 Азимут
+					input(type='number',step=0.00001, min=0, max=360, id='obja', name='obja', value=obja?obja:0)
+					h3 Дополнительная информация
+					input(type='text', id='objinfo', name='objinfo', value=objinfo?objinfo:'',maxlength=1000)
+					p 
+						button(type='submit') Добавить
+			
