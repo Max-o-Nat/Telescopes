@@ -1,4 +1,4 @@
-const fetch = require('isomorphic-fetch')
+const fetch = require('isomorphic-fetch');
 
 const config = {
     db : {
@@ -12,7 +12,7 @@ const config = {
     astrophoto : '/public/images/astrophoto/',
     userphoto : '/public/images/userphoto/',
     defaultuseravatar : '/public/images/userphoto/defaultuseravatar.png',
-    secret : "pl,okmijnuhbygvtfcr"
+    secret : 'pl,okmijnuhbygvtfcr'
 };
 
 module.exports =  config;
