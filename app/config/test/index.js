@@ -2,7 +2,11 @@ const fetch = require('isomorphic-fetch');
 
 const config = {
     db : {
-        connectionString: process.env.DATABASE_URL,
+      host: 'localhost',
+      port: 5432,
+      database: 'telescopesdb',
+      user: 'postgres',
+      password: ''
     },
     dbx: {
         fetch : fetch,

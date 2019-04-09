@@ -1,32 +1,29 @@
-const db = require(__dirname + '/../db.js').db
+const db = require(__dirname + '/../db.js').db;
 
 async function objects() {
 	try {
-		var data = await db.func('Objects')
-		return data
-	}
-	catch(err) {
-		throw err
+		var data = await db.func('Objects');
+		return data;
+	} catch (err) {
+		throw err;
 	}
 }
 
 async function sortObjects() {
 	try {
-		var data = await db.func('SortObjects')
-		return data
-	}
-	catch(err) {
-		throw err
+		var data = await db.func('SortObjects');
+		return data;
+	} catch (err) {
+		throw err;
 	}
 }
 
 async function searchObjects(searchtype, searchtext) {
 	try {
-		var data = await db.func('SearchObjects', [searchtype, searchtext])
-		return data
-	}
-	catch(err) {
-		throw err
+		var data = await db.func('SearchObjects', [searchtype, searchtext]);
+		return data;
+	} catch (err) {
+		throw err;
 	}
 }
 
@@ -37,20 +34,18 @@ async function createObject(objname, objh, obja, objinfo) {
 			objh,
 			obja,
 			objinfo
-		])
-	}
-	catch(err) {
-		throw err
+		]);
+	} catch (err) {
+		throw err;
 	}
 }
 
 async function objectByID(id) {
 	try {
-		var data = await db.func('ObjectByID', id)
-		return data
-	}
-	catch(err) {
-		throw err
+		var data = await db.func('ObjectByID', id);
+		return data;
+	} catch (err) {
+		throw err;
 	}
 }
 
@@ -62,19 +57,17 @@ async function changeObject(id, objname, objh, obja, objinfo) {
 			objh,
 			obja,
 			objinfo
-		])
-	}
-	catch(err) {
-		throw err
+		]);
+	} catch (err) {
+		throw err;
 	}
 }
 
 async function deleteObjectByID(id) {
 	try {
-		await db.func('DeleteObjectByID', id)
-	}
-	catch(err) {
-		throw err
+		await db.func('DeleteObjectByID', id);
+	} catch (err) {
+		throw err;
 	}
 }
 
@@ -86,4 +79,4 @@ module.exports = {
 	objectByID : objectByID,
 	changeObject : changeObject,
 	deleteObjectByID : deleteObjectByID
-}
+};
