@@ -6,7 +6,6 @@ install:
 - npm install
 script:
 - nyc npm test && nyc report --reporter=text-lcov | coveralls
-- codecov
 services:
 - postgresql
 branches:
