@@ -6,7 +6,6 @@ install:
 - npm install
 - npm install eslint
 script:
-- npm run lintinit
 - npm run lint
 - nyc npm test && nyc report --reporter=text-lcov | coveralls
 services:
