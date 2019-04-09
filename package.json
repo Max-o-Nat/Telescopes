@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node server",
     "dstart": "nodemon server",
-    "lint": "eslint -c .eslintrc.json ./ \"./**/*.js\" --fix",
+    "lint": "eslint \"./**/*.js\" --fix",
     "test": "mocha --timeout 10000 tests/*.*test.js"
   },
   "dependencies": {
