@@ -1,5 +1,5 @@
 [![Travis][build-badge]][build]
-[![Coveralls][coveralls-badge]][coveralls]
+[![Coverage Status](https://coveralls.io/repos/github/Max-o-Nat/Telescopes/badge.svg?branch=master)](https://coveralls.io/github/Max-o-Nat/Telescopes?branch=/feature/ci)
 
 # Система пользовательских телескопов
 
@@ -7,6 +7,3 @@
 
 [build-badge]: https://img.shields.io/travis/Max-o-Nat/Telescopes/master.png?style=flat-square
 [build]: https://travis-ci.com/Max-o-Nat/Telescopes
-
-[coveralls-badge]: https://img.shields.io/coveralls/Max-o-Nat/Telescopes/master.png?style=flat-square
-[coveralls]: https://coveralls.io/github/Max-o-Nat/Telescopes
