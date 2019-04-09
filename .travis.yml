@@ -1,11 +1,21 @@
 language: node_js
-
 sudo: false
-
-language: node_js
 node_js:
-  - 8
-
+- 8
+install:
+  - npm install -g codecov
+services:
+- postgresql
 branches:
   only:
-    - feature/ci
+  - feature/ci
+before_script:
+- psql -c 'create database telescopesdb;' -U postgres
+- psql -c "\i ./dbscripts/createtables.sql" telescopesdb postgres
+after_success:
+- cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
+- cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+deploy:
+  provider: heroku
+  api_key:
+    secure: 5Xb5W/RxckqXCuzxZe8jNSX+UXMl/rGoP8zTpC/i3TkkbkjdYtKS/KL+fVtk+ix5Yj4TORQcYZNxt1475jiYo6BtceGmR1z/Ev5QhLLGRNe3L7PksMJTFUuheJr7qTXTN1ZYREfGfpYa8gDP4FrlQvNFIiZ4lNNWrsr3qHvqqwZbr3tjP71MgyUdm7/tr0i6T8MP3jrgoWLbMKIFdE02tJLYuZxBgNxsGwXSfIJgUPvezhzn4p7R9WDoFis1lBqsUQye1oykI7Fg84t0adw2CHDBBs398IpGN/9bP9qUvhgrmnMCbntqfXSZOjtl8KKqYOc8TGsOn0s9zz40GN2kLSnvM6IXSJ0wWymZsAc7bAapvd6U5COhKV+JQcXVcivY/5q93GUgxGXrX1BLeuBon0HvmhQCGkw3VXrMPwO0Tman4KhtDuh9SVcZOs6/TJnvEMRdWYAZMHcL6R5F18WDavOfdz8W53frYdzGQzqp1H28Ehx3jheRUOz90+3X1Vt3GY1HLT5BNsOaXrsU4Z7j/3Goi0yiakQRbQkQc8rFPuKXeLWaxSDjX+8P5HyCp9KLQBD4ZuRxA6xdFr/E0X1Ow48Din/TvepgxHc0eysnsQ0WitbHzjsuyuF59tDrNGvF7BP/zrstBxJ4CE5BOd0tYlN+X2/Xu3grdXe7lh/9Tkw=
