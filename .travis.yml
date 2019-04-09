@@ -3,10 +3,10 @@ sudo: false
 node_js:
 - 8
 install:
-  - npm install
+- npm install
 script:
-  - istanbul cover ./node_modules/mocha/bin/_mocha --reporter lcovonly -- -R spec
-  - codecov
+- nyc npm test && nyc report --reporter=text-lcov | coveralls
+- codecov
 services:
 - postgresql
 branches:
@@ -18,4 +18,4 @@ before_script:
 deploy:
   provider: heroku
   api_key:
-    secure: 5Xb5W/RxckqXCuzxZe8jNSX+UXMl/rGoP8zTpC/i3TkkbkjdYtKS/KL+fVtk+ix5Yj4TORQcYZNxt1475jiYo6BtceGmR1z/Ev5QhLLGRNe3L7PksMJTFUuheJr7qTXTN1ZYREfGfpYa8gDP4FrlQvNFIiZ4lNNWrsr3qHvqqwZbr3tjP71MgyUdm7/tr0i6T8MP3jrgoWLbMKIFdE02tJLYuZxBgNxsGwXSfIJgUPvezhzn4p7R9WDoFis1lBqsUQye1oykI7Fg84t0adw2CHDBBs398IpGN/9bP9qUvhgrmnMCbntqfXSZOjtl8KKqYOc8TGsOn0s9zz40GN2kLSnvM6IXSJ0wWymZsAc7bAapvd6U5COhKV+JQcXVcivY/5q93GUgxGXrX1BLeuBon0HvmhQCGkw3VXrMPwO0Tman4KhtDuh9SVcZOs6/TJnvEMRdWYAZMHcL6R5F18WDavOfdz8W53frYdzGQzqp1H28Ehx3jheRUOz90+3X1Vt3GY1HLT5BNsOaXrsU4Z7j/3Goi0yiakQRbQkQc8rFPuKXeLWaxSDjX+8P5HyCp9KLQBD4ZuRxA6xdFr/E0X1Ow48Din/TvepgxHc0eysnsQ0WitbHzjsuyuF59tDrNGvF7BP/zrstBxJ4CE5BOd0tYlN+X2/Xu3grdXe7lh/9Tkw=
+    secure: 6lWcKmgoLpNx21HCHBOVD4zAjzEKv/SqsTUe1NbMYFDs47WIqBHlPs6E3ZB2c6+6sxxcMengQXNpi5uEwaXY2Nn/aGATJO8Nn2sk5dcujAb6mkfq/Esd7VtgGY9IAiljeteEpQ2UYzGMaPVmhTbxRlOS2n+AawUz3Lk9s7uLXcaRTQ23ZcSh7UnDVEaT9o70wUzSaJXUbikC1mSKPEmV95x6I8vLUWYBu/rt5k8SCJPOVhwqBD7GMMSYRaB2bOTokEPVX86ZkD40e4SdK/GmZQCDJLGStUeYmtHE3ACULBuEjt2zqdk8XSpNQQjI0p3sDz6OKqzjPEK73pfEAPOuiFC+Id3iBnWA2dZ1osNdsNC0pAs2iCpdge1Ra389kttndLw7LcIIn0H2Dzzyh9Ik8ge5jjxvjI8BAYsuf3G2DpGPew62vVigxypPU+WsAxtF1X18xaCsXQA2s15c9oS2KP135NXOw7SWu+g8wa6KPiw56oPe5tLJBaXTxz5J1kZrZt2e76cdNeVJtAeekNw85MX8zlW9Iw33pdAlFWBjdRmF1Qw42xb01nsMYLxyFPyx+TKBllHMV7EDMH7ztdrIZ+zn2l8/hVijFmXLJx8XL9kOS/l6AyW/zTSily4LPjWh3Z5op5xu4GdHURqrXWbe0VPbc2dS4QWUCRqGQ8kPHEk=
