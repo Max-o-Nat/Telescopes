@@ -15,9 +15,6 @@ branches:
 before_script:
 - psql -c 'create database telescopesdb;' -U postgres
 - psql -c "\i ./dbscripts/createtables.sql" telescopesdb postgres
-after_success:
-- cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
-- cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 deploy:
   provider: heroku
   api_key:
