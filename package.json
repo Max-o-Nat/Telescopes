@@ -10,6 +10,7 @@
     "start": "node server",
     "dstart": "nodemon server",
     "lint": "eslint \"./**/*.js\" --fix",
+    "lintinit": "eslint --init",
     "test": "mocha --timeout 10000 tests/*.*test.js"
   },
   "dependencies": {
