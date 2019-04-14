@@ -96,6 +96,25 @@ router.post('/create', [
 	}
 ])
 
+/**
+ * @api {get} /telescopes/:id Запрос телескопа
+ * @apiName GetIdTelescopes
+ * @apiGroup Telescopes
+ *
+ * @apiParam {Number} id Идентификатор телескопа
+ *
+ * @apiSuccess {String} title Название страницы
+ * @apiSuccess {Object} login Только вошедшие в систему пользователи могут получить данную страницу
+ * @apiSuccess {String} login.username Имя пользователя
+ * @apiSuccess {String="admin","user"} login.role Роль пользователя
+ * @apiSuccess {Object[]} info Массив объектов с информацией о каждом телескопе
+ * @apiSuccess {Number} info.id Идентификатор телескопа
+ * @apiSuccess {String} info.name Название телескопа
+ * @apiSuccess {String="рефлектор","рефрактор","катадиоптрический"} info.type Тип телескопа
+ * @apiSuccess {String} info.country Страна телескопа
+ * @apiSuccess {String} info.city Город телескопа
+ * @apiSuccess {String} info.info Дополнительная информация о телескопе
+ */
 router.get('/:id', [
 	async (req, res, next) => {
 		try {
@@ -112,6 +131,25 @@ router.get('/:id', [
 	}
 ])
 
+/**
+ * @api {get} /telescopes/:id/change Запрос формы на изменение телескопа
+ * @apiName GetIdChangeTelescopes
+ * @apiGroup Telescopes
+ *
+ * @apiParam {Number} id Идентификатор телескопа
+ *
+ * @apiSuccess {String} title Название страницы
+ * @apiSuccess {Object} login Только вошедшие в систему пользователи могут получить данную страницу
+ * @apiSuccess {String} login.username Имя пользователя
+ * @apiSuccess {String="admin","user"} login.role Роль пользователя
+ * @apiSuccess {Object[]} info Массив объектов с информацией о каждом телескопе
+ * @apiSuccess {Number} info.id Идентификатор телескопа
+ * @apiSuccess {String} info.name Название телескопа
+ * @apiSuccess {String="рефлектор","рефрактор","катадиоптрический"} info.type Тип телескопа
+ * @apiSuccess {String} info.country Страна телескопа
+ * @apiSuccess {String} info.city Город телескопа
+ * @apiSuccess {String} info.info Дополнительная информация о телескопе
+ */
 router.get('/:id/change', [
 	async (req, res, next) => {
 		try {
@@ -128,6 +166,30 @@ router.get('/:id/change', [
 	}
 ])
 
+/**
+ * @api {post} /telescopes/:id/change Запрос формы на изменение телескопа
+ * @apiName PostIdChangeTelescopes
+ * @apiGroup Telescopes
+ *
+ * @apiParam {Number} id Идентификатор телескопа
+ * @apiParam {String} name Название телескопа
+ * @apiParam {String="рефлектор","рефрактор","катадиоптрический"} type Тип телескопа
+ * @apiParam {String} country Страна телескопа
+ * @apiParam {String} city Город телескопа
+ * @apiParam {String} info Дополнительная информация о телескопе
+ *
+ * @apiSuccess {String} title Название страницы
+ * @apiSuccess {Object} login Только вошедшие в систему пользователи могут получить данную страницу
+ * @apiSuccess {String} login.username Имя пользователя
+ * @apiSuccess {String="admin","user"} login.role Роль пользователя
+ * @apiSuccess {Object[]} info Массив объектов с информацией о каждом телескопе
+ * @apiSuccess {Number} info.id Идентификатор телескопа
+ * @apiSuccess {String} info.name Название телескопа
+ * @apiSuccess {String="рефлектор","рефрактор","катадиоптрический"} info.type Тип телескопа
+ * @apiSuccess {String} info.country Страна телескопа
+ * @apiSuccess {String} info.city Город телескопа
+ * @apiSuccess {String} info.info Дополнительная информация о телескопе
+ */
 router.post('/:id/change', [
 	async (req, res, next) => {
 		try {
@@ -159,6 +221,13 @@ router.post('/:id/change', [
 	}
 ])
 
+/**
+ * @api {get} /telescopes/:id/delete Запрос на удаление телескопа
+ * @apiName GetIdDeleteTelescopes
+ * @apiGroup Telescopes
+ *
+ * @apiParam {Number} id Идентификатор телескопа
+ */
 router.get('/:id/delete', [
 	async (req, res, next) => {
 		try {

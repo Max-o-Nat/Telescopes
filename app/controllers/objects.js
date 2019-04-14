@@ -296,7 +296,7 @@ router.post('/:id/change', [
 ])
 
 /**
- * @api {post} /objects/:id/delete Запрос на удаление небесного тела
+ * @api {get} /objects/:id/delete Запрос на удаление небесного тела
  * @apiName GetIdDeleteObjects
  * @apiGroup Objects
  *
