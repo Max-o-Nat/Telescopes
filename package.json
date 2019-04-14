@@ -35,7 +35,7 @@
     "node-mocks-http": "^1.7.3",
     "npm": "^6.4.1",
     "pg-promise": "^8.4.4",
-    "pug": "2.0.0-beta11",
+    "pug": "^2.0.0-beta11",
     "sinon": "^7.3.1",
     "sinon-chai": "^3.3.0"
   },
