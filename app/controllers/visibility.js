@@ -125,13 +125,16 @@ router.get('/create', [
  * @apiName PostCreateVisibility
  * @apiGroup Visibility
  *
- * @apiParam {Number} info.telid Идентификатор телескопа
- * @apiParam {Number} info.objid Идентификатор небесного тела
+ * @apiParam {Number} telid Идентификатор телескопа
+ * @apiParam {Number} objid Идентификатор небесного тела
  *
  * @apiSuccess {String} title Название страницы
  * @apiSuccess {Object} login Только вошедшие в систему пользователи могут получить данную страницу
  * @apiSuccess {String} login.username Имя пользователя
  * @apiSuccess {String="admin","user"} login.role Роль пользователя
+ * @apiSuccess {Object[]} info Массив объектов с информацией о каждой вдимости
+ * @apiSuccess {Number} info.telid Идентификатор телескопа
+ * @apiSuccess {Number} info.objid Идентификатор небесного тела
  */
 router.post('/create', [
   async (req, res, next) => {
