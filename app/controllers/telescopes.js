@@ -31,11 +31,11 @@ router.get('/create', [
  * @apiName PostСreateTelescopes
  * @apiGroup Telescopes
  *
- * @apiSuccess {String} name Название телескопа
- * @apiSuccess {String="рефлектор","рефрактор","катадиоптрический"} type Тип телескопа
- * @apiSuccess {String} country Страна телескопа
- * @apiSuccess {String} city Город телескопа
- * @apiSuccess {String} info Дополнительная информация о телескопе
+ * @apiParam {String} name Название телескопа
+ * @apiParam {String="рефлектор","рефрактор","катадиоптрический"} type Тип телескопа
+ * @apiParam {String} country Страна телескопа
+ * @apiParam {String} city Город телескопа
+ * @apiParam {String} info Дополнительная информация о телескопе
  *
  * @apiSuccess {String} title Название страницы
  * @apiSuccess {Object} login Только вошедшие в систему пользователи могут получить данную страницу
