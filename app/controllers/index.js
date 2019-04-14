@@ -39,7 +39,7 @@ router.get('/', async (req, res, next) => {
  * @apiName PostSortIndex
  * @apiGroup Index
  *
- * @apiParam {String="Страна","Город","Тип телескопа"} sorttype Признак, по которому происходит сортировка 
+ * @apiParam {String="Страна","Город","Тип телескопа"} sorttype Признак, по которому происходит сортировка
  *
  * @apiSuccess {String} title Название страницы
  * @apiSuccess {Object} login Только вошедшие в систему пользователи могут получить данную страницу

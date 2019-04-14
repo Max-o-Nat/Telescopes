@@ -18,16 +18,16 @@ var db = require(path.join(__dirname, '/../models/dbfunctions/visibility'))
  * @apiSuccess {Number} info.objid Идентификатор небесного тела
  */
 router.get('/', async (req, res, next) => {
-	try {
-		var data = await db.visibility()
-		res.render('visibility', {
-			title: 'Видимость',
-			login: req.user,
-			info: data
-		})
-	} catch (err) {
-		next(err)
-	}
+  try {
+    var data = await db.visibility()
+    res.render('visibility', {
+      title: 'Видимость',
+      login: req.user,
+      info: data
+    })
+  } catch (err) {
+    next(err)
+  }
 })
 
 /**
@@ -47,16 +47,16 @@ router.get('/', async (req, res, next) => {
  * @apiSuccess {Number} info.objid Идентификатор небесного тела
  */
 router.post('/sort', async (req, res, next) => {
-	try {
-		var data = await db.sortVisibility()
-		res.render('visibility', {
-			title: 'Видимость',
-			login: req.user,
-			info: data
-		})
-	} catch (err) {
-		next(err)
-	}
+  try {
+    var data = await db.sortVisibility()
+    res.render('visibility', {
+      title: 'Видимость',
+      login: req.user,
+      info: data
+    })
+  } catch (err) {
+    next(err)
+  }
 })
 
 /**
@@ -66,7 +66,7 @@ router.post('/sort', async (req, res, next) => {
  *
  * @apiParam {String="ID телескопа","ID небесного тела"} searchtype Признак, по которому происходит сортировка
  * @apiParam {String} searchtext Текст поискового запроса
-	*
+ *
  * @apiSuccess {String} title Название страницы
  * @apiSuccess {Object} login Только вошедшие в систему пользователи могут получить данную страницу
  * @apiSuccess {String} login.username Имя пользователя
@@ -77,23 +77,23 @@ router.post('/sort', async (req, res, next) => {
  * @apiSuccess {Number} info.objid Идентификатор небесного тела
  */
 router.post('/search', async (req, res, next) => {
-	try {
-		var data = []
-		if (req.body.searchtype === 'ID телескопа') {
-			data = await db.telescopeVisibility(req.body.searchtext)
-		} else {
-			data = await db.objectVisibility(req.body.searchtext)
-		}
-		res.render('visibility', {
-			title: 'Видимость',
-			login: req.user,
-			searchtext: req.body.searchtext,
-			searchtype: req.body.searchtype,
-			info: data
-		})
-	} catch (err) {
-		next(err)
-	}
+  try {
+    var data = []
+    if (req.body.searchtype === 'ID телескопа') {
+      data = await db.telescopeVisibility(req.body.searchtext)
+    } else {
+      data = await db.objectVisibility(req.body.searchtext)
+    }
+    res.render('visibility', {
+      title: 'Видимость',
+      login: req.user,
+      searchtext: req.body.searchtext,
+      searchtype: req.body.searchtype,
+      info: data
+    })
+  } catch (err) {
+    next(err)
+  }
 })
 
 /**
@@ -107,17 +107,17 @@ router.post('/search', async (req, res, next) => {
  * @apiSuccess {String="admin","user"} login.role Роль пользователя
  */
 router.get('/create', [
-	async (req, res, next) => {
-		try {
-			res.render('visibilitycreate', {
-				title: 'Добавление видимости',
-				login: req.user,
-				err: req.errors
-			})
-		} catch (err) {
-			next(err)
-		}
-	}
+  async (req, res, next) => {
+    try {
+      res.render('visibilitycreate', {
+        title: 'Добавление видимости',
+        login: req.user,
+        err: req.errors
+      })
+    } catch (err) {
+      next(err)
+    }
+  }
 ])
 
 /**
@@ -137,27 +137,27 @@ router.get('/create', [
  * @apiSuccess {Number} info.objid Идентификатор небесного тела
  */
 router.post('/create', [
-	async (req, res, next) => {
-		try {
-			await db.createVisibility([
-				req.body.telid,
-				req.body.objid
-			])
-			res.redirect('/visibility')
-		} catch (err) {
-			req.errors = [{ msg: err.detail }]
-			next()
-		}
-	},
-	async (req, res) => {
-		res.render('visibilitycreate', {
-			title: 'Добавление видимости',
-			login: req.user,
-			telid: req.body.telid,
-			objid: req.body.objid,
-			err: req.errors
-		})
-	}
+  async (req, res, next) => {
+    try {
+      await db.createVisibility([
+        req.body.telid,
+        req.body.objid
+      ])
+      res.redirect('/visibility')
+    } catch (err) {
+      req.errors = [{ msg: err.detail }]
+      next()
+    }
+  },
+  async (req, res) => {
+    res.render('visibilitycreate', {
+      title: 'Добавление видимости',
+      login: req.user,
+      telid: req.body.telid,
+      objid: req.body.objid,
+      err: req.errors
+    })
+  }
 ])
 
 /**
@@ -168,14 +168,14 @@ router.post('/create', [
  * @apiParam {Number} info.id Идентификатор видимости
  */
 router.get('/:id/delete', [
-	async (req, res, next) => {
-		try {
-			await db.deleteVisibilityByID(req.params.id)
-			res.redirect('/visibility')
-		} catch (err) {
-			next(err)
-		}
-	}
+  async (req, res, next) => {
+    try {
+      await db.deleteVisibilityByID(req.params.id)
+      res.redirect('/visibility')
+    } catch (err) {
+      next(err)
+    }
+  }
 ])
 
 module.exports = router
