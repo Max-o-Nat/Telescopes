@@ -3,6 +3,20 @@ const path = require('path')
 var router = express.Router()
 var db = require(path.join(__dirname, '/../models/dbfunctions/visibility'))
 
+/**
+ * @api {get} /visibility/ Запрос информации о видимостях
+ * @apiName GetVisibility
+ * @apiGroup Visibility
+ *
+ * @apiSuccess {String} title Название страницы
+ * @apiSuccess {Object} login Только вошедшие в систему пользователи могут получить данную страницу
+ * @apiSuccess {String} login.username Имя пользователя
+ * @apiSuccess {String="admin","user"} login.role Роль пользователя
+ * @apiSuccess {Object[]} info Массив объектов с информацией о каждой вдимости
+ * @apiSuccess {Number} info.id Идентификатор видимости
+ * @apiSuccess {Number} info.telid Идентификатор телескопа
+ * @apiSuccess {Number} info.objid Идентификатор небесного тела
+ */
 router.get('/', async (req, res, next) => {
   try {
     var data = await db.visibility()
@@ -16,6 +30,22 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+/**
+ * @api {post} /visibility/ Запрос сортированной информации о видимостях
+ * @apiName PostSortVisibility
+ * @apiGroup Visibility
+ *
+ * @apiParam {String="ID телескопа","ID небесного тела"} sorttype Признак, по которому происходит сортировка
+ *
+ * @apiSuccess {String} title Название страницы
+ * @apiSuccess {Object} login Только вошедшие в систему пользователи могут получить данную страницу
+ * @apiSuccess {String} login.username Имя пользователя
+ * @apiSuccess {String="admin","user"} login.role Роль пользователя
+ * @apiSuccess {Object[]} info Массив объектов с информацией о каждой вдимости
+ * @apiSuccess {Number} info.id Идентификатор видимости
+ * @apiSuccess {Number} info.telid Идентификатор телескопа
+ * @apiSuccess {Number} info.objid Идентификатор небесного тела
+ */
 router.post('/sort', async (req, res, next) => {
   try {
     var data = await db.sortVisibility()
@@ -29,6 +59,23 @@ router.post('/sort', async (req, res, next) => {
   }
 })
 
+/**
+ * @api {post} /visibility/ Запрос на поиск информации о видимостях
+ * @apiName PostSearchVisibility
+ * @apiGroup Visibility
+ *
+ * @apiParam {String="ID телескопа","ID небесного тела"} searchtype Признак, по которому происходит сортировка
+ * @apiParam {String} searchtext Текст поискового запроса
+  *
+ * @apiSuccess {String} title Название страницы
+ * @apiSuccess {Object} login Только вошедшие в систему пользователи могут получить данную страницу
+ * @apiSuccess {String} login.username Имя пользователя
+ * @apiSuccess {String="admin","user"} login.role Роль пользователя
+ * @apiSuccess {Object[]} info Массив объектов с информацией о каждой вдимости
+ * @apiSuccess {Number} info.id Идентификатор видимости
+ * @apiSuccess {Number} info.telid Идентификатор телескопа
+ * @apiSuccess {Number} info.objid Идентификатор небесного тела
+ */
 router.post('/search', async (req, res, next) => {
   try {
     var data = []
@@ -49,6 +96,16 @@ router.post('/search', async (req, res, next) => {
   }
 })
 
+/**
+ * @api {get} /visibility/ Запрос формы на создание видимости
+ * @apiName GetCreateVisibility
+ * @apiGroup Visibility
+ *
+ * @apiSuccess {String} title Название страницы
+ * @apiSuccess {Object} login Только вошедшие в систему пользователи могут получить данную страницу
+ * @apiSuccess {String} login.username Имя пользователя
+ * @apiSuccess {String="admin","user"} login.role Роль пользователя
+ */
 router.get('/create', [
   async (req, res, next) => {
     try {
@@ -63,6 +120,19 @@ router.get('/create', [
   }
 ])
 
+/**
+ * @api {post} /visibility/ Запрос на создание видимости
+ * @apiName PostCreateVisibility
+ * @apiGroup Visibility
+ *
+ * @apiParam {Number} info.telid Идентификатор телескопа
+ * @apiParam {Number} info.objid Идентификатор небесного тела
+ *
+ * @apiSuccess {String} title Название страницы
+ * @apiSuccess {Object} login Только вошедшие в систему пользователи могут получить данную страницу
+ * @apiSuccess {String} login.username Имя пользователя
+ * @apiSuccess {String="admin","user"} login.role Роль пользователя
+ */
 router.post('/create', [
   async (req, res, next) => {
     try {
@@ -87,6 +157,13 @@ router.post('/create', [
   }
 ])
 
+/**
+ * @api {get} /visibility/ Запрос на удаление видимости
+ * @apiName GetDeleteVisibility
+ * @apiGroup Visibility
+ *
+ * @apiParam {Number} info.id Идентификатор видимости
+ */
 router.get('/:id/delete', [
   async (req, res, next) => {
     try {
@@ -97,4 +174,5 @@ router.get('/:id/delete', [
     }
   }
 ])
+
 module.exports = router
