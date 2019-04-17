@@ -31,6 +31,12 @@ app.use('/', indexRouter)
 app.use('/objects', objectsRouter)
 app.use('/visibility', visibilityRouter)
 
+app.get('/logout', function(req, res){
+	req.logout()
+	res.cookie('jwt', '0')
+	res.redirect('/login')
+})
+
 app.use(function (req, res, next) {
   next(createError(404))
 })
