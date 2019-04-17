@@ -1,0 +1,14 @@
+extends layout
+
+include selector.pug
+
+block content
+	table
+		tr
+			td
+				h3 Выберите небесное тело
+				form(action='/requests/create/'+telid,method='POST')
+					telname
+					select(id="objname" name="objname")
+						+selector(objects)
+					button(type='submit')='Выбрать'

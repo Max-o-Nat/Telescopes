@@ -11,6 +11,7 @@ const usersRouter = require(path.join(__dirname, '/controllers/users'))
 const objectsRouter = require(path.join(__dirname, '/controllers/objects'))
 const visibilityRouter = require(path.join(__dirname, '/controllers/visibility'))
 const loginRouter = require(path.join(__dirname, '/controllers/login'))
+const requestsRouter = require(__dirname + '/controllers/requests')
 const registrationRouter = require(path.join(__dirname, '/controllers/registration'))
 
 const app = express()
@@ -31,6 +32,7 @@ app.use(passport.authenticate('jwt', { session: false, failureRedirect: '/login'
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/objects', objectsRouter)
+app.use('/requests', requestsRouter)
 app.use('/visibility', [
   async (req, res, next) => {
     if (req.user.role !== 'admin') { res.redirect('/') } else { next() }
