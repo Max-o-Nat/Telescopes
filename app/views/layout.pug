@@ -2,6 +2,14 @@ extends main
 
 block navigation
 	nav
+		if login
+			li
+				a(href='/logout') Выйти
+		else
+			li
+				a(href='/login') Войти 
+				dev или 
+				a(href='/registration') Зарегистрироваться
 		li
 			a(href='/')='Телескопы'
 		li

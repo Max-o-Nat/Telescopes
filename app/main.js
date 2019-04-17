@@ -1,11 +1,16 @@
 const express = require('express')
 const createError = require('http-errors')
 const path = require('path')
+const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
+
+const passport = require(path.join(__dirname, '/models/passport'))
 
 const indexRouter = require(path.join(__dirname, '/controllers/index'))
 const objectsRouter = require(path.join(__dirname, '/controllers/objects'))
 const visibilityRouter = require(path.join(__dirname, '/controllers/visibility'))
+const loginRouter = require(path.join(__dirname, '/controllers/login'))
+const registrationRouter = require(path.join(__dirname, '/controllers/registration'))
 
 const app = express()
 
@@ -15,10 +20,13 @@ app.use(express.static(path.join(__dirname, '/../public')))
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
-
+app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+app.use('/registration', registrationRouter)
+app.use('/login', loginRouter)
+app.use(passport.authenticate('jwt', { session: false, failureRedirect: '/login' }))
 app.use('/', indexRouter)
 app.use('/objects', objectsRouter)
 app.use('/visibility', visibilityRouter)

@@ -1,0 +1,17 @@
+extends main
+
+block content
+  form(action='',method='POST')
+    ul
+      le
+        h3='Логин'
+      le
+        input(type='text',id='username', name='username',value=(undefined===username ? '' : username))
+      le
+        h3='Пароль'
+      le
+        input(type='password', id='password', name='password')
+    p
+      button(type='submit')='Войти'
+    p
+      a(href="../registration")='Регистрация'
