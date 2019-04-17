@@ -1,0 +1,24 @@
+extends main
+
+block content
+  h4 Все поля обязательны для заполнения.
+  form(action='',method='POST')
+    ul
+      le
+        h3='Email'
+      le
+        input(type='email', id='email', name='email', value = email?email:'')
+      le
+        h3='Логин'
+      le
+        input(type='text',id='username', name='username',value=(undefined===username ? '' : username), class='username')
+      le
+        h3='Пароль'
+      le
+        input(type='password', id='password', name='password')
+      le
+        h3='Повтор пароля'
+      le
+        input(type='password', id='repeatpassword', name='repeatpassword')
+    p
+      button(type='submit')='Регистрация'
