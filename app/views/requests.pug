@@ -1,0 +1,41 @@
+extends layout
+
+block content
+	a(href='/requests/create')='Создать'
+	if info.length == 0
+		h3 Нет подходящих результатов
+	else
+		h3='Найдено '+info.length+ ' результат(ов):'
+		if login.role == 'admin'
+			table
+				each r in info
+					tr
+						td
+							p=r.id
+							p
+								a(href='/users/profile/'+r.uid)='Пользователь: ' + r.uid
+							p
+								a(href='/telescopes/'+r.tid)='Телескоп: ' + r.tid
+							p
+								a(href='/objects/'+r.objid)='Небесное тело: ' + r.objid
+							p=r.d
+							p=r.status
+							if r.status == 'принят'
+								p
+									a(href='/requests/'+r.id+'/update') Выполнить
+							p
+								a(href='/requests/'+r.id+'/delete') Удалить
+		else
+			table
+				each r in info
+					tr
+						td
+							h3=r.id
+							p
+								a(href='/telescopes/'+r.tid)='Телескоп ' + r.tname
+							p
+								a(href='/objects/'+r.objid)='Небесное тело ' + r.objname
+							p=r.d
+							p=r.status
+							p
+								a(href='/requests/'+r.id+'/delete') Удалить
