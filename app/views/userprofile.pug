@@ -1,0 +1,52 @@
+extends layout
+
+include selector.pug
+
+block gallery
+	script(type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+	script(src='/galleria/galleria-1.5.7.min.js')
+	script(type='text/javascript' src='/javascripts/page.js')
+
+block content
+	if info.length == 0
+		h3 Такого пользователя не существует
+	else
+		table
+			each user in info
+				tr
+					td
+						image(src=user.avatar)
+						form(action='/users/profile/changeavatar',method='POST', enctype='multipart/form-data')
+							input(type='file',id='avatar',name='avatar')
+							button(type='submit')='Изменить аватар'
+					td
+						ul
+							h3='ID '+user.userid
+							if login.role == 'admin'
+								form(action='/users/changerole/'+user.userid,method='POST')
+									select(id="role" name="role")
+										+selector(['admin', 'user'], user.role)
+									button(type='submit')='Изменить роль'
+							form(action='/users/profile/change',method='POST')
+								le
+									h3 Логин
+									input(type='text',id='username', name='username', value=username?username:user.login)
+								le
+									h3 Email
+									input(type='email',id='email', name='email', value=email?email:user.email)
+								le
+									h3 Пароль
+									input(type='text',id='password', name='password', value=password?password:user.password)
+								le
+									h3 Информация
+									input(type='text',id='info', name='info', value=userinfo?userinfo:user.userinfo,maxlength=1000) 
+								p
+									button(type='submit')='Изменить'
+						form(action='/users/profile/',method='GET')
+							button(type='submit')='Сбросить'
+		p 
+			h2 Астрофотографии пользователя
+		div(class='galleria')
+			if imgs
+				each img in imgs
+					img(src=img)
