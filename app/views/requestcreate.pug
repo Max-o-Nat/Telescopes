@@ -1,0 +1,13 @@
+extends layout
+
+include selector.pug
+
+block content
+	table
+		tr
+			td
+				h3 Выберите телескоп
+				form(action='/requests/create',method='POST')
+					select(id="telname" name="telname")
+						+selector(telescopes)
+					button(type='submit')='Выбрать'
