@@ -16,8 +16,10 @@ block navigation
 			a(href='/')='Телескопы'
 		li
 			a(href='/objects')='Небесные тела'
-		li
-			a(href='/visibility')='Видимость'
+		if login
+			if login.role=='admin'
+				li
+					a(href='/visibility')='Видимость'
 
 block footerblock
 	footer
