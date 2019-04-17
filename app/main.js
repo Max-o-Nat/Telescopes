@@ -7,6 +7,7 @@ const morgan = require('morgan')
 const passport = require(path.join(__dirname, '/models/passport'))
 
 const indexRouter = require(path.join(__dirname, '/controllers/index'))
+const usersRouter = require(path.join(__dirname, '/controllers/users'))
 const objectsRouter = require(path.join(__dirname, '/controllers/objects'))
 const visibilityRouter = require(path.join(__dirname, '/controllers/visibility'))
 const loginRouter = require(path.join(__dirname, '/controllers/login'))
@@ -28,8 +29,14 @@ app.use('/registration', registrationRouter)
 app.use('/login', loginRouter)
 app.use(passport.authenticate('jwt', { session: false, failureRedirect: '/login' }))
 app.use('/', indexRouter)
+app.use('/users', usersRouter)
 app.use('/objects', objectsRouter)
-app.use('/visibility', visibilityRouter)
+app.use('/visibility', [
+  async (req, res, next) => {
+    if (req.user.role !== 'admin') { res.redirect('/') } else { next() }
+  },
+  visibilityRouter
+])
 
 app.get('/logout', function (req, res) {
   req.logout()
