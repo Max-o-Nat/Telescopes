@@ -3,20 +3,17 @@ var express = require('express')
 var router = express.Router()
 var db = require(path.join(__dirname, '/../models/dbfunctions/requests'))
 var dbx = require(path.join(__dirname, '/../models/dropbox'))
-var config = require(path.join(__dirname, '/../config/', (process.env.NODE_ENV || 'development')))
 var multer = require('multer')
 var storage = multer.memoryStorage()
 var upload = multer({ storage: storage })
-var { body, validationResult } = require('express-validator/check')
-var { sanitizeBody } = require('express-validator/filter')
-var passport = require(path.join(__dirname, '/../models/passport'))
-var rwlock = require('rwlock')
-var lock = new rwlock()
+var Rwlock = require('rwlock')
+var lock = new Rwlock()
 var lockflag = []
 
 router.get('/', async (req, res, next) => {
   try {
-    if (req.user.role == 'admin') { var data = await db.requests() } else { var data = await db.userRequests(req.user.username) }
+    var data
+    if (req.user.role === 'admin') { data = await db.requests() } else { data = await db.userRequests(req.user.username) }
 
     res.render('requests', {
       title: 'Запросы',
@@ -49,7 +46,7 @@ router.post('/create', [
     } catch (err) {
       next(err)
     }
-    if (objects && (objects.length == 0)) {
+    if (objects && (objects.length === 0)) {
       try {
         var data = await db.requestTelescopes()
       } catch (err) {
@@ -59,7 +56,7 @@ router.post('/create', [
         title: 'Создание запроса',
         telescopes: data,
         login: req.user,
-        err: [{ msg: 'У данного телескопа нет доступных небесных тел, выберите другой.' } ]
+        err: [{ msg: 'У данного телескопа нет доступных небесных тел, выберите другой.' }]
       })
     } else {
       res.render('requestcreate1', {
@@ -91,7 +88,7 @@ router.get('/:id/update', [
   async (req, res, next) => {
     try {
       lock.readLock(function (release) {
-        if ((lockflag[req.params.id]) && (lockflag[req.params.id] != req.user.username)) { res.redirect('/requests') } else {
+        if ((lockflag[req.params.id]) && (lockflag[req.params.id] !== req.user.username)) { res.redirect('/requests') } else {
           lockflag[req.params.id] = req.user.username
           try {
             res.render('requestupdate', {
