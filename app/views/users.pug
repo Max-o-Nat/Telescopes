@@ -1,0 +1,29 @@
+extends layout
+
+include selector.pug
+
+block content
+	form(action='/users/search',method='POST')
+		select(id="searchtype" name="searchtype")
+			+selector(['Логин','Email','ID'], searchtype)
+		input(type='text',id='searchtext', name='searchtext', value=searchtext ? searchtext: '')
+		button(type='submit')='Поиск'
+	form(action='/users/sort',method='POST')
+		select(id="sorttype",name="sorttype")
+			+selector(['Логин','Email','ID'], sorttype)
+		button(type='submit')='Сортировать'
+	form(action='/users',method='GET')
+		button(type='submit')='Сбросить'
+	if info.length == 0
+		h3 Нет подходящих результатов
+	else
+		h3='Найдено '+info.length+ ' результат(ов):'
+		table
+			each user in info
+				tr
+					td
+						p 
+							a(href='/users/profile/'+user.userid)=user.login
+						p=user.email
+						p=user.info
+		
