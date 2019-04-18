@@ -10,8 +10,10 @@ script:
 services:
 - postgresql
 before_script:
+- cd createtables
 - psql -c 'create database telescopesdb;' -U postgres
-- psql -c "\i ./dbscripts/createtables.sql" telescopesdb postgres
+- psql -c "\i ./testcreateandfill" telescopesdb postgres
+- cd ..
 deploy:
   provider: heroku
   api_key:

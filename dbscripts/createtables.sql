@@ -1,9 +1,9 @@
 DROP TYPE IF EXISTS TELESCOPETYPE CASCADE;
 
 CREATE TYPE TELESCOPETYPE AS ENUM(
-	'РєР°С‚Р°РґРёРѕРїС‚СЂРёС‡РµСЃРєРёР№',
-	'СЂРµС„Р»РµРєС‚РѕСЂ',
-	'СЂРµС„СЂР°РєС‚РѕСЂ'
+	'катадиоптрический',
+	'рефлектор',
+	'рефрактор'
 );
 
 DROP TABLE IF EXISTS Telescopes CASCADE;
@@ -13,8 +13,8 @@ CREATE TABLE Telescopes(
 	TelescopeName TEXT NOT NULL UNIQUE,
 	TelescopeType TELESCOPETYPE NOT NULL,
 	TelescopeInfo TEXT  NOT NULL DEFAULT '',
-	City TEXT NOT NULL DEFAULT 'РњРѕСЃРєРІР°',
-	Country TEXT NOT NULL DEFAULT 'Р РѕСЃСЃРёСЏ'
+	City TEXT NOT NULL DEFAULT 'Москва',
+	Country TEXT NOT NULL DEFAULT 'Россия'
 );
 
 DROP TYPE IF EXISTS USERTYPE CASCADE;
@@ -61,8 +61,8 @@ CREATE TABLE Visibility(
 DROP TYPE IF EXISTS REQUESTSTATUSTYPE CASCADE;
 
 CREATE TYPE REQUESTSTATUSTYPE AS ENUM(
-	'РїСЂРёРЅСЏС‚',
-	'РІС‹РїРѕР»РЅРµРЅ'
+	'принят',
+	'выполнен'
 );
 
 DROP TABLE IF EXISTS Requests CASCADE;
@@ -74,7 +74,7 @@ CREATE TABLE Requests(
 	TelescopeID INTEGER NOT NULL REFERENCES Telescopes(TelescopeID) ON DELETE CASCADE,
 	ObjectID INTEGER NOT NULL REFERENCES Objects(ObjectID) ON DELETE CASCADE,
 	CreateDate TIMESTAMP NOT NULL DEFAULT NOW(),
-	RequestStatus REQUESTSTATUSTYPE NOT NULL DEFAULT 'РїСЂРёРЅСЏС‚'
+	RequestStatus REQUESTSTATUSTYPE NOT NULL DEFAULT 'принят'
 );
 
 DROP TABLE IF EXISTS Astrophotographies CASCADE;

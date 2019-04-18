@@ -1,0 +1,9 @@
+\i createtables.sql
+
+\i telescopesfunctions.sql
+\i usersfunctions.sql
+\i requestsfunctions.sql
+\i objectsfunctions.sql
+\i visibilityfunctions.sql
+
+INSERT INTO Users(email, login, password, userrole) VALUES ('zhar97@yandex.ru', 'Kazeshiro', '123456789', 'admin')

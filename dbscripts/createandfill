@@ -1,0 +1,9 @@
+\i createtables.sql
+
+\i telescopesfunctions.sql
+\i usersfunctions.sql
+\i requestsfunctions.sql
+\i objectsfunctions.sql
+\i visibilityfunctions.sql
+
+\i fill.sql
