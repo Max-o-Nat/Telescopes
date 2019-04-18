@@ -10,7 +10,7 @@ script:
 services:
 - postgresql
 before_script:
-- cd createtables
+- cd dbscripts
 - psql -c 'create database telescopesdb;' -U postgres
 - psql -c "\i ./testcreateandfill" telescopesdb postgres
 - cd ..
