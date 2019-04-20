@@ -19,7 +19,7 @@
     "lint": "eslint \"./**/*.js\" --fix",
     "lintinit": "eslint --init",
     "doc": "apidoc -i app/",
-    "test": "mocha --timeout 10000 tests/*.*test.js"
+    "test": "mocha --timeout 10000 tests/*.*test.js app/models/dbfunctions/tests/*.test.js"
   },
   "dependencies": {
     "acorn": "^6.1.1",
